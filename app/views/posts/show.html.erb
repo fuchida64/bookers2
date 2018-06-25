@@ -1,0 +1,27 @@
+<div class='row'>
+	<div class='col-xs-3'>
+    	<%= render 'users/list', user: @user %>
+    	<%= render 'posts/list', postup: @postup %>
+    </div>
+
+	<div class='col-xs-9'>
+		<h2>Book detail</h2>
+		<table class='table'>
+		  	<tr>
+	        	<td>
+	        		<%= link_to user_path(@post.user.id) do %>
+	        		<%= attachment_image_tag @post.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "attachment user profile_image", fallback: "no_image.jpg" %><br>
+	          		<%= @post.user.username %>
+	          		<% end %>
+	        	</td>
+	        	<td><%= @post.title %></td>
+	        	<td><%= @post.opinion %></td>
+	        	<% if @post.user == current_user %>
+	          	<td><%= link_to "Edit", edit_post_path(@post.id), class: "btn-sm btn-success" %></td>
+	          	<td><%= link_to "Destroy", destroy_path(@post.id), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn-sm btn-danger" %>
+	          	</td>
+	          	<% end %>
+      		</tr>
+    	</table>
+  	</div>
+</div>

@@ -18,7 +18,7 @@
     <tbody>
     <% @user.posts.each do |post| %>
       <tr>
-        <td><%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', class: "attachment user profile_image", fallback: "no_image.jpg" %></td>
+        <td><%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
         <td><%= link_to (post.title), post_path(post.id) %></td>
         <td><%= post.opinion %></td>
       </tr>
@@ -26,4 +26,3 @@
     </tbody>
   </table>
 </div>
-

@@ -3,6 +3,17 @@
     <h1>Editing Book</h1>
     <%= form_for(@post) do |f| %>
 
+    <% if @post.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <p><%= @post.errors.count %>件のエラーが発生しました。</p>
+        <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="field row">
       <%= f.label :title %><br />
       <%= f.text_field :title, class: "col-xs-12" %>

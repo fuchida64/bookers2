@@ -1,6 +1,8 @@
 <h2>New book</h2>
 <%= form_for(postup) do |f| %>
-
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
 <div class="field row">
   <%= f.label :title %><br />
   <%= f.text_field :title, class: "col-xs-12" %>

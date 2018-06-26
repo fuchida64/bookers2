@@ -1,35 +1,34 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
-    before_action :ensure_correct_user, {only: [:edit, :update]}
+    before_action :ensure_correct_user, only: [:edit, :update]
+    before_action :post_find, only: [:show, :edit, :update, :destroy]
     def index
         @postup = Post.new
         @posts = Post.all
         @user = User.find(current_user.id)
     end
 
-	def create
+    def create
         @posts = Post.all
-		@postup = Post.new(post_params)
-	    @postup.user_id = current_user.id
+        @postup = Post.new(post_params)
+        @postup.user_id = current_user.id
         if @postup.save
            redirect_to post_path(@postup.id)
         else
-          render 'index'
+           redirect_to posts_path
+           flash[:alert] = "エラーが発生しました"
         end
     end
 
     def show
-    	@post = Post.find(params[:id])
-        @user = User.find(current_user.id)
+        @user = User.find(@post.user_id)
         @postup = Post.new
     end
 
     def edit
-        @post = Post.find(params[:id])
     end
 
     def update
-        @post = Post.find(params[:id])
         if @post.update(post_params)
               redirect_to post_path(@post.id)
         else
@@ -38,7 +37,6 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        @post = Post.find(params[:id])
         @post.destroy
           redirect_to posts_path
     end
@@ -55,4 +53,7 @@ class PostsController < ApplicationController
         params.require(:post).permit(:title, :opinion, :user_id)
     end
 
+    def post_find
+        @post = Post.find(params[:id])
+    end
 end

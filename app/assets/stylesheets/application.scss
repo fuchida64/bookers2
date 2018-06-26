@@ -34,10 +34,17 @@ header .navbar-left span {
 .notice {
     color: green;
 }
+#fallback1 {
+  height: 100px;
+  width: 100px;
+}
 .fallback {
 	height: 40px;
 	width: 40px;
 }
 .field, .actions {
     margin-bottom: 10px;
+}
+.alert {
+  color: red;
 }

@@ -36,7 +36,9 @@
 
     <div class='body'>
       <div class='container'>
+        <% if notice %>
         <p class="notice"><%= notice %></p>
+        <% end %>
         <%= yield %>
       </div>
     </div>
